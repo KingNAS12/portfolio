@@ -2,28 +2,28 @@
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Nathan Alex Sequeira</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=IM+Fell+English:ital@0;1&family=EB+Garamond:ital,wght@0,400;0,700;1,400&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#fbe6cc;--hdr:#fff3e2;--bub:#fff9ef;--menu:#e7d9fa;--b1:#5b2a9e;--b2:#f08a24;--on1:#fff;--title:#2a1250;--sub:#4a2a80;--body:#2b1d3d;--line:#2a1250;--ts:2.4rem;--ss:1.2rem;--bs:1.12rem;
+:root{--bg:#fbe6cc;--hdr:#fff3e2;--bub:#fff9ef;--menu:#e7d9fa;--b1:#5b2a9e;--b2:#f08a24;--on1:#fff;--title:#2a1250;--sub:#4a2a80;--body:#2b1d3d;--line:#2a1250;--fh:"Cinzel","Times New Roman",serif;--fb:"IM Fell English",Georgia,serif;--ts:2.4rem;--ss:1.2rem;--bs:1.12rem;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1a0f2e;--hdr:#26164a;--bub:#2b1a52;--menu:#382266;--b1:#b18cff;--b2:#ffa040;--on1:#1a0f2e;--title:#fff1e0;--sub:#ead8ff;--body:#eee4fb;--line:#b18cff}}
 :root[data-theme="dark"]{--bg:#1a0f2e;--hdr:#26164a;--bub:#2b1a52;--menu:#382266;--b1:#b18cff;--b2:#ffa040;--on1:#1a0f2e;--title:#fff1e0;--sub:#ead8ff;--body:#eee4fb;--line:#b18cff}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg) radial-gradient(circle at 15% 8%,rgba(240,138,36,.16),transparent 45%) fixed;background-image:radial-gradient(circle at 15% 8%,rgba(240,138,36,.16),transparent 45%),radial-gradient(circle at 88% 92%,rgba(91,42,158,.14),transparent 50%);background-attachment:fixed;color:var(--body);font:var(--bs)/1.6 "IM Fell English",Georgia,serif}
-h1,h2,h3{letter-spacing:.03em;font-family:"Cinzel","Times New Roman",serif;color:var(--title);margin:0;line-height:1.15}
+body{margin:0;background:var(--bg) radial-gradient(circle at 15% 8%,rgba(240,138,36,.16),transparent 45%) fixed;background-image:radial-gradient(circle at 15% 8%,rgba(240,138,36,.16),transparent 45%),radial-gradient(circle at 88% 92%,rgba(91,42,158,.14),transparent 50%);background-attachment:fixed;color:var(--body);font:var(--bs)/1.6 var(--fb)}
+h1,h2,h3{letter-spacing:.03em;font-family:var(--fh);color:var(--title);margin:0;line-height:1.15}
 a{color:var(--b1);font-weight:600}
 button{font:inherit;cursor:pointer;color:var(--title)}
 :focus-visible{outline:3px solid var(--b2);outline-offset:2px}
 header{background:var(--hdr);border-bottom:6px double var(--line);display:flex;align-items:center;gap:1rem;padding:.7rem 1.2rem;position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
-.av{width:64px;height:64px;border-radius:50%;background:var(--b1);color:var(--on1);display:grid;place-items:center;font:800 1.4rem "Cinzel",serif;border:3px solid var(--line);flex:none}
+.av{width:64px;height:64px;border-radius:50%;background:var(--b1);color:var(--on1);display:grid;place-items:center;font:800 1.4rem var(--fh);border:3px solid var(--line);flex:none}
 header h1{flex:1;text-align:center;font-size:clamp(1.3rem,4vw,2.6rem);font-weight:800}
-.roles{font:600 .8rem/1.5 "Cinzel",serif;color:var(--sub);text-align:right;letter-spacing:.06em}
+.roles{font:600 .8rem/1.5 var(--fh);color:var(--sub);text-align:right;letter-spacing:.06em}
 #burger{position:fixed;left:.8rem;top:calc(env(safe-area-inset-top,0px) + 92px);z-index:6;background:var(--b2);border:3px solid var(--line);border-radius:12px;width:46px;height:46px;font-size:1.4rem;box-shadow:3px 3px 0 var(--line)}
 main{max-width:980px;margin:0 auto;padding:1.5rem 1.2rem 2rem}
 .page{display:none}.page.on{display:block}
 .pt{text-align:center;font-size:var(--ts);font-weight:800;margin:.2rem 0 1.5rem;padding:0 3rem}
-.pt small{display:block;font:500 var(--ss) "IM Fell English",serif;color:var(--sub);margin-top:.4rem}
+.pt small{display:block;font:500 var(--ss) var(--fb);color:var(--sub);margin-top:.4rem}
 .bub{background:var(--bub);border:3px solid var(--line);border-radius:18px;padding:1.2rem 1.4rem;box-shadow:5px 5px 0 var(--line);margin-bottom:1.6rem}
 h2{font-size:var(--ss);font-size:calc(var(--ss)*1.3);color:var(--sub);margin-bottom:.8rem}
 h3{color:var(--sub);font-size:var(--ss)}
@@ -53,12 +53,13 @@ h3{color:var(--sub);font-size:var(--ss)}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.4rem}
 .card{background:var(--bub);border:3px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:5px 5px 0 var(--line);display:flex;flex-direction:column}
 .card h3{padding:.8rem 1rem;background:var(--menu);border-bottom:3px solid var(--line)}
-.thumb{height:130px;display:grid;place-items:center;font:800 2.6rem "Cinzel",serif;color:#fff;border-bottom:3px solid var(--line)}
+.thumb{height:130px;display:grid;place-items:center;font:800 2.6rem var(--fh);color:#fff;border-bottom:3px solid var(--line)}
 .card .in{padding:1rem;flex:1;display:flex;flex-direction:column;gap:.4rem;font-size:.95rem}
 .card .in .btn{margin-top:auto;align-self:flex-end}
 .dl{display:grid;gap:.9rem}
 .set{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.8rem 2rem}
 .set label{display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.set select{font:inherit;color:var(--title);background:var(--bub);border:2px solid var(--line);border-radius:8px;padding:.3rem .5rem;max-width:60%}
 .set input[type=color]{width:52px;height:34px;border:2px solid var(--line);border-radius:8px;background:none;padding:0}
 #drawer{position:fixed;inset:0;z-index:20;display:none;background:rgba(10,12,30,.45)}
 #drawer.on{display:block}
@@ -167,10 +168,11 @@ chips("#q-sort",["Chronological","Alphabetic","Importance"],0,drawQ,"Chronologic
 chips("#d-sort",["Chronological","Popularity","Alphabetic"],0,drawD,"Chronological");chips("#d-filter",["CS","Games","Apps","Writings","Research","Story"],1,drawD);
 drawQ();drawD();
 /* settings */
-var SET=[["Title text size","--ts","range",1.6,3.4,.1,"rem"],["Subtitle text size","--ss","range",.9,1.8,.05,"rem"],["Body text size","--bs","range",.85,1.5,.05,"rem"],["Title text colour","--title","color"],["Subtitle text colour","--sub","color"],["Body text colour","--body","color"],["Background colour","--bg","color"],["Header colour","--hdr","color"],["Bubble colour","--bub","color"],["Menu colour","--menu","color"],["Button colour 1","--b1","color"],["Button colour 2","--b2","color"]];
+var FONTS=[["Cinzel (inscription)",'"Cinzel","Times New Roman",serif'],["IM Fell English (old print)",'"IM Fell English",Georgia,serif'],["EB Garamond (classic book)",'"EB Garamond",Garamond,serif'],["Atkinson Hyperlegible (easy to read)",'"Atkinson Hyperlegible",Verdana,sans-serif'],["Georgia",'Georgia,serif'],["System sans-serif",'system-ui,sans-serif'],["Monospace",'ui-monospace,Menlo,monospace']];
+var SET=[["Title font","--fh","select"],["Body font","--fb","select"],["Title text size","--ts","range",1.6,3.4,.1,"rem"],["Subtitle text size","--ss","range",.9,1.8,.05,"rem"],["Body text size","--bs","range",.85,1.5,.05,"rem"],["Title text colour","--title","color"],["Subtitle text colour","--sub","color"],["Body text colour","--body","color"],["Background colour","--bg","color"],["Header colour","--hdr","color"],["Bubble colour","--bub","color"],["Menu colour","--menu","color"],["Button colour 1","--b1","color"],["Button colour 2","--b2","color"]];
 var root=document.documentElement,saved={};try{saved=JSON.parse(localStorage.getItem("prefs")||"{}")}catch(e){}
 function hex(v){var c=document.createElement("canvas").getContext("2d");c.fillStyle=v.trim();return c.fillStyle}
-function draw(){$("#set").innerHTML="";SET.forEach(function(s){var l=document.createElement("label"),i=document.createElement("input");i.type=s[2];l.textContent=s[0];
+function draw(){$("#set").innerHTML="";SET.forEach(function(s){var l=document.createElement("label"),i=document.createElement(s[2]==="select"?"select":"input");if(s[2]!=="select")i.type=s[2];l.textContent=s[0];if(s[2]==="select"){var cur=getComputedStyle(root).getPropertyValue(s[1]).replace(/\s/g,"");FONTS.forEach(function(f){var o=document.createElement("option");o.value=f[1];o.textContent=f[0];if(f[1].replace(/\s/g,"")===cur)o.selected=true;i.appendChild(o)})}else 
 if(s[2]==="range"){i.min=s[3];i.max=s[4];i.step=s[5];i.value=parseFloat(getComputedStyle(root).getPropertyValue(s[1]))}else i.value=hex(getComputedStyle(root).getPropertyValue(s[1]));
 i.oninput=function(){var v=s[2]==="range"?i.value+s[6]:i.value;root.style.setProperty(s[1],v);saved[s[1]]=v;try{localStorage.setItem("prefs",JSON.stringify(saved))}catch(e){}};l.appendChild(i);$("#set").appendChild(l)})}
 for(var k in saved)root.style.setProperty(k,saved[k]);draw();
