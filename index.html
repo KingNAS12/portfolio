@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nathan Alex Sequeira</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FDC79F; --header:#FFFFFF; --bubble:#D9D9D9; --menu:#B0FFA8; --btn1:#62FF4F; --btn2:#D9D9D9; --bar:#0099FF;
+  --title:#000000; --subtitle:#000000; --body:#111111;
+  --title-size:2.6rem; --subtitle-size:1.5rem; --body-size:1.05rem;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--body);font:var(--body-size)/1.6 "Bitter",Georgia,serif}
+a{color:inherit}
+:focus-visible{outline:3px solid #0033cc;outline-offset:2px}
+header{background:var(--header);border:1px solid #000;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.5rem 1.2rem;position:sticky;top:0;z-index:5}
+.avatar{width:84px;height:84px;border-radius:50%;background:var(--bubble);object-fit:cover;flex:none}
+header h1{margin:0;font-size:var(--title-size);color:var(--title);text-align:center;flex:1;line-height:1.1}
+.roles{font-style:italic;font-weight:700;letter-spacing:.2em;text-align:right;line-height:1.4;font-size:.95rem}
+.bar{display:flex;align-items:flex-start;gap:1rem;padding:1rem 1.2rem 0}
+.burger{background:none;border:0;cursor:pointer;padding:.4rem;flex:none}
+.burger span{display:block;width:30px;height:3px;background:#000;margin:6px 0;border-radius:2px}
+.back{background:none;border:0;font:inherit;cursor:pointer;padding:.4rem;text-decoration:underline}
+.bar h2{margin:0;flex:1;text-align:center;font-size:var(--subtitle-size);color:var(--subtitle);font-weight:700}
+.bar h2 b{font-size:calc(var(--subtitle-size)*1.5);color:var(--title);font-weight:700}
+main{max-width:1100px;margin:0 auto;padding:1rem 1.2rem 2rem}
+nav#menu{position:fixed;left:12px;top:110px;z-index:10;background:var(--menu);border:1px solid #000;border-radius:40px;padding:1rem;width:min(360px,calc(100vw - 24px));display:none}
+nav#menu.open{display:block}
+nav#menu a{display:block;text-decoration:none;text-align:center;border:1px solid #000;border-radius:50px;padding:.7rem .5rem;margin:.5rem 0;background:transparent;font-weight:700}
+nav#menu a i{font-weight:700}
+nav#menu a.on,nav#menu a:hover{background:var(--btn1)}
+.controls{display:flex;gap:3rem;flex-wrap:wrap;margin:1rem 0 1.5rem}
+.controls fieldset{border:0;padding:0;margin:0}
+.controls legend{font-weight:700;padding:0}
+.controls label{display:block;cursor:pointer}
+.bubble{background:var(--bubble);border:1px solid #000;border-radius:48px;padding:1.5rem 1.8rem;margin:0 0 1.5rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:2rem}
+.card{display:flex;flex-direction:column;padding:0;overflow:hidden}
+.card h3{margin:0;padding:1rem;text-align:center;font-size:1.3rem;color:var(--subtitle)}
+.card .pic{background:#fff;height:190px;display:grid;place-items:center;color:#777}
+.card .pic img{width:100%;height:100%;object-fit:cover}
+.card .txt{padding:1rem 1.5rem 1.5rem;flex:1;display:flex;flex-direction:column;gap:.4rem}
+.btn{background:var(--btn1);border:1px solid #000;border-radius:30px;padding:.5rem 1.4rem;font:inherit;font-weight:700;cursor:pointer;text-decoration:none;color:inherit;display:inline-block}
+.btn.two{background:var(--btn2)}
+.card .btn{align-self:flex-end;margin-top:auto}
+.tag{display:inline-block;background:var(--header);border:1px solid #000;border-radius:20px;padding:0 .7rem;font-size:.85rem;margin-right:.3rem}
+.job h3{margin:0;font-size:1.1rem}.job h3 em{font-weight:400}
+.job ul{margin:.4rem 0 0;padding-left:1.4rem}
+.job{margin-bottom:1.6rem}
+.chart{margin:1rem 0}
+.chart h3{color:var(--subtitle);margin:0 0 .5rem}
+.row{display:grid;grid-template-columns:110px 1fr;gap:.8rem;align-items:center;margin:.35rem 0}
+.row span{text-align:right}
+.track{background:rgba(255,255,255,.55);border-radius:4px}
+.fill{height:24px;background:var(--bar);border:1px solid #000;border-radius:4px}
+.scale{display:grid;grid-template-columns:110px repeat(4,1fr);gap:.8rem;font-style:italic;font-size:.9rem}
+.scale span:first-child{grid-column:1}
+.scale span{text-align:center}
+.edu{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.edu ul{margin:.2rem 0;padding-left:1.3rem;list-style:"– "}
+footer{display:flex;flex-wrap:wrap;gap:1rem 2rem;justify-content:center;padding:2rem 1rem;font-weight:700;font-size:.95rem}
+footer a{white-space:nowrap}
+.center{text-align:center}.warn{max-width:760px;margin:4rem auto;font-weight:700;font-size:1.3rem;text-align:center}
+.warn p{margin:1.4rem 0}
+.fade{opacity:0;transition:opacity 1.2s ease}.fade.show{opacity:1}
+@media (prefers-reduced-motion:reduce){.fade{opacity:1;transition:none}}
+.setrow{display:grid;grid-template-columns:200px 1fr;gap:1rem;align-items:center;margin:.5rem 0}
+.setrow input[type=color]{width:70px;height:36px;padding:0;border:1px solid #000;background:none;cursor:pointer}
+.links a{display:block}
+@media (max-width:700px){
+  header{flex-wrap:wrap;justify-content:center}.roles{text-align:center;letter-spacing:.1em}
+  header h1{font-size:calc(var(--title-size)*.7);flex-basis:100%;order:2}.avatar{width:64px;height:64px}
+  .row,.scale{grid-template-columns:80px 1fr}.scale{display:none}
+  nav#menu{top:150px}
+}
+</style>
+</head>
+<body>
+<header>
+  <img id="avatar" class="avatar" alt="Photo of Nathan">
+  <h1>Nathan Alex Sequeira</h1>
+  <div class="roles">Programmer<br>Writer<br>Classicist</div>
+</header>
+<div id="bar" class="bar"></div>
+<nav id="menu" aria-label="Main menu"></nav>
+<main id="app"></main>
+<footer id="foot"></footer>
+
+<script>
+/* ===================== EDIT YOUR CONTENT HERE ===================== */
+const CONTACT = {
+  resume: "resume.pdf",                       // put your resume file next to this page
+  email: "nathanseq12@gmail.com",
+  phone: "(780) 242-7852",
+  itch: "https://king-nas.itch.io/",
+  insta: "https://www.instagram.com/king_n.a.s/"
+};
+
+// One photo per page. Put images in a "photos" folder; a grey circle shows if a file is missing.
+const PHOTOS = { tldr:"photos/tldr.jpg", skills:"photos/skills.jpg", quests:"photos/quests.jpg",
+                 devlog:"photos/devlog.jpg", contact:"photos/contact.jpg", settings:"photos/settings.jpg" };
+
+const ABOUT = "I am who I am so hire me. Blah blah blah blah; yada yada yada yada. (Replace this with your real About Me.)";
+
+const SKILLS = {
+  "Programming Languages": [["C#",100],["Python",100],["C",55],["Small Basic",33],["SQL",33],["Assembly",22],["Kotlin",14]],
+  "Tools": [["Unity",65],["Figma",55],["Android Studio",21],["Godot",18]]
+};
+
+// start = sortable date, imp = importance (higher first), tags drive the filters, top = shown on TLDR page
+const QUESTS = [
+ {org:"MacEwan University",role:"Open Lab Teaching Assistant",when:"September 2026 – Present",start:"2026-09",imp:6,tags:["Work","CS","Tutor"],top:1,
+  pts:["Assist students across four computer science courses with programming assignments during open lab hours.",
+       "Guide students through problem-solving so they build their own solutions rather than being handed answers.",
+       "Explain course concepts in approachable ways, adapting to different experience levels.",
+       "Provide one-on-one support that connects lectures and assignments to practical programming."]},
+ {org:"MacEwan Cybersecurity Club",role:"Event Coordinator",when:"September 2026 – Present",start:"2026-09",imp:3,tags:["Volunteer","CS"],
+  pts:["Plan and coordinate cybersecurity events, including logistics and scheduling.",
+       "Helped found the club's annual MacEwan CTF as a recurring competition for students.",
+       "Work with executives to create practical, hands-on learning events."],link:"https://clubeh.ca/"},
+ {org:"MacEwan Game Dev Club",role:"President (April 2026 – Present), Secretary (April 2025 – April 2026)",when:"",start:"2025-04",imp:9,tags:["Volunteer","CS"],top:1,
+  pts:["Joined as Secretary when the club was four months old and helped build its structure, events and community.",
+       "Helped grow the club to over 400 members and win New Student Group of the Year.",
+       "Manage documentation, correspondence, meetings and executive communication.",
+       "Founded the monthly workshop series, the annual Game Showcase, and co-founded the bi-monthly Qubit's Holiday Challenges.",
+       "Primary organizer of the annual MacEwan Game Jam from its second year; that event grew to over three times the size of the first and gained external sponsors.",
+       "Hosted two workshops and coordinated the rest with professors and industry guests.",
+       "Support student-led game projects with feedback, troubleshooting and introductions to members with complementary skills."],link:"https://macewangdc.carrd.co/"},
+ {org:"MacEwan Computer Science Club",role:"Secretary",when:"April 2026 – Present",start:"2026-04",imp:7,tags:["Volunteer","CS"],top:1,
+  pts:["Joined the executive team to revive the club after about three years of inactivity.",
+       "Reorganized the club's Google Drive and archives; document meetings and decisions.",
+       "Worked with the CS Department to clean and restock the CS student space.",
+       "Help plan academic, networking and student-focused events."],link:"https://macewancsclub.ca/"},
+ {org:"Home Depot",role:"Tool Rental Associate (April – August 2026), Front-End Cashier (April – August 2025)",when:"",start:"2025-04",imp:2,tags:["Work","Cashier"],
+  pts:["Delivered accurate customer service in a high-volume retail environment.",
+       "Handled cash, card and other transactions with attention to accountability.",
+       "In Tool Rental, assisted customers with equipment rentals and returns."]},
+ {org:"Dairy Queen",role:"Cashier",when:"April – October 2024",start:"2024-04",imp:1,tags:["Work","Cashier"],
+  pts:["Took orders, answered questions and resolved customer concerns.",
+       "Handled cash and electronic transactions accurately in a fast-paced environment."]},
+ {org:"Self-Employed",role:"Math & Computer Science Tutor",when:"July 2022 – December 2024",start:"2022-07",imp:4,tags:["Work","CS","Tutor"],
+  pts:["Provided one-on-one tutoring in mathematics and computer science.",
+       "Adapted explanations to each student's learning style and areas of difficulty.",
+       "Helped students develop problem-solving strategies they could use independently."]}
+];
+
+// cat: Games / Apps / Research / Story
+const PROJECTS = [
+ {id:"jasper",title:"Jasper Adams and the Hunt for the Golden Maple Syrup",cat:["Games"],pop:3,start:"2026-02",timeline:"February – April 2026",
+  summary:"A 2D platformer built in Unity as lead programmer and writer for CMPT 330 Intro to Game Dev.",
+  desc:"Implemented core gameplay systems, level design and player mechanics in Unity for the first time. Conducted user testing and is working to publish academic papers on the effects of surprise and frustration on different player types.",
+  details:"Add dev reports, postmortems or attached files here.",
+  links:[["Downloadable","https://king-nas.itch.io/jasper-adams"],["Trailer","https://www.instagram.com/p/DXAZ-yVkgBz/"]]},
+ {id:"ddd",title:"Duck Duck Defer",cat:["Apps"],pop:2,start:"2026-01",timeline:"January – April 2026",
+  summary:"A scheduling and messaging app. Won 1st place in an IEEE-sponsored class competition for best app.",
+  desc:"Co-Scrum Master and Lead Architect for CMPT 395 Software Engineering. Designed and implemented most of the backend logic and database architecture in Android Studio and Firebase, led system design decisions, and coordinated sprint planning and task delegation using Agile.",
+  details:"Add dev reports, postmortems or attached files here.",
+  links:[["Developer Guide","https://drive.google.com/file/d/1RfjSegi2o7HjH6-CXKTZSTkUGbh4Vc_3/view?usp=drive_link"],["Trailer","https://www.instagram.com/p/DXAGK6zDtzF/"]]},
+ {id:"cleophon",title:"Cleophon: Rebuilding Athens",cat:["Games","Research"],pop:1,start:"2025-12",timeline:"December 2025; September 2027 – April 2028 (planned)",
+  summary:"A VR historical simulator where you live as an Athenian in the Classical period.",
+  desc:"Originally designed for a research essay in CLAS 270 Intro to Greek Civilization, and planned as my CMPT 498 Capstone Project. The design won 3rd place at the MacEwan University Humanities Research Showcase. Much media about ancient warfare is inaccurate, which makes it hard to picture the real thing from a textbook. The goal is to publish a research paper on how VR can assist education, then keep developing it into a fully publishable VR game after graduation.",
+  details:"Add dev reports, postmortems or attached files here.",links:[]}
+];
+/* ================================================================== */
+
+const $ = s => document.querySelector(s);
+const PAGES = {
+  tldr:["TLDR","My Resume","If you do not want to go through the rest of this website, here's the highlights."],
+  skills:["Skill Tree","My Education","My educational history and knowledge"],
+  quests:["Side Quests","My Experience","My work and volunteer experience"],
+  devlog:["Dev Log","My Projects","My various projects along with dev reports where possible."],
+  contact:["Contact","My Socials","Get in touch."],
+  settings:["Settings","I'm Colourblind","I'm colourblind, so if you don't like my choices, you may change them."]
+};
+const safe = (f,d) => { try { return f() } catch(e){ return d } };
+
+/* ---------- pieces ---------- */
+const chart = () => Object.entries(SKILLS).map(([g,list]) =>
+  `<div class="chart" role="img" aria-label="${g} proficiency chart">${g==="Programming Languages"?`<h3>Proficiency in Programming Languages and Tools</h3><div class="scale"><span></span><span>Beginner</span><span>Intermediate</span><span>Advanced</span><span>Expert</span></div>`:'<div style="height:.8rem"></div>'}
+  ${list.map(([n,v])=>`<div class="row"><span>${n}</span><div class="track"><div class="fill" style="width:${v}%" title="${v}%"></div></div></div>`).join("")}</div>`).join("");
+
+const job = (q,short) => `<div class="job"><h3>${q.org}, <em>${q.role}</em>${q.when?` (${q.when})`:""}</h3>
+  <ul>${(short?q.pts.slice(0,3):q.pts).map(p=>`<li>${p}</li>`).join("")}${q.link&&!short?`<li><a href="${q.link}">${q.link}</a></li>`:""}</ul></div>`;
+
+const card = p => `<article class="bubble card"><h3>${p.title}</h3>
+  <div class="pic"><img src="projects/${p.id}.jpg" alt="" onerror="this.replaceWith(document.createTextNode('Screenshot coming soon'))"></div>
+  <div class="txt"><div>${p.cat.map(c=>`<span class="tag">${c}</span>`).join("")}</div>
+  <div><b>Summary:</b> ${p.summary}</div><div><b>Timeline:</b> ${p.timeline}</div>
+  <div><b>Link:</b> ${p.links[0]?`<a href="${p.links[0][1]}">${p.links[0][0]}</a>`:"None yet"}</div>
+  <a class="btn" href="#devlog/${p.id}">More Info</a></div></article>`;
+
+function sortFilter(kind, sorts, filters){
+  return `<div class="controls">
+   <fieldset><legend>Sort</legend>${sorts.map((s,i)=>`<label><input type="radio" name="sort" value="${s}" ${i?"":"checked"}> ${s}</label>`).join("")}</fieldset>
+   <fieldset><legend>Filter</legend>${filters.map(f=>`<label><input type="checkbox" name="filter" value="${f}"> ${f}</label>`).join("")}</fieldset></div>
+   <div id="results"></div>`;
+}
+function wire(kind, items, render, sorters){
+  const draw = () => {
+    const s = document.querySelector('input[name=sort]:checked').value;
+    const f = [...document.querySelectorAll('input[name=filter]:checked')].map(x=>x.value);
+    let list = items.filter(i => !f.length || f.some(t => (i.tags||i.cat).includes(t)));
+    list = list.slice().sort(sorters[s]);
+    $("#results").innerHTML = list.length ? (kind==="grid" ? `<div class="grid">${list.map(render).join("")}</div>` : list.map(render).join("")) : "<p>Nothing matches those filters.</p>";
+  };
+  document.querySelectorAll(".controls input").forEach(i=>i.addEventListener("change",draw)); draw();
+}
+
+/* ---------- pages ---------- */
+const VIEWS = {
+ tldr:()=>`<p class="center" style="margin-top:0">${contactLinks()}</p>
+  <h3>About Me</h3><p>${ABOUT}</p>${chart()}
+  <h3 class="center"><u>My Recent Work/Volunteer Experience</u></h3>${QUESTS.filter(q=>q.top).map(q=>job(q,true)).join("")}
+  <h3 class="center"><u>My Best Projects</u></h3>
+  ${PROJECTS.map(p=>`<div class="job"><h3>${p.title}, <em>${p.summary.split(".")[0]}</em> (${p.timeline})</h3><ul><li>${p.desc.split(". ").slice(0,2).join(". ")}.</li>${p.links.map(l=>`<li>${l[0]}: <a href="${l[1]}">${l[1]}</a></li>`).join("")}</ul></div>`).join("")}`,
+ skills:()=>`<div class="edu"><div><b>MacEwan University</b> (2023 – Present)<ul><li><i>Computer Science</i> major<ul><li>Specializing in <i>Game Development</i></li><li>Specializing in <i>Information Security</i></li></ul></li><li><i>Classical History</i> minor</li></ul></div><a class="btn two" href="transcript.pdf">Transcript</a></div>
+  <div class="edu"><div><b>St. Francis Xavier High</b> (2020 – 2023)<ul><li>High school diploma</li></ul></div><a class="btn two" href="academic-report.pdf">Academic Report</a></div>${chart()}`,
+ quests:()=>sortFilter("list",["Chronological","Alphabetic","Importance"],["Work","Volunteer","CS","Cashier","Tutor"]),
+ devlog:()=>sortFilter("grid",["Chronological","Popularity","Alphabetic"],["Games","Apps","Research","Story"]),
+ contact:()=>`<div class="bubble links" style="max-width:560px;margin:1rem auto"><h3 style="margin-top:0">Find me here</h3>${contactLinks(true)}</div>`,
+};
+function project(id){
+  const p = PROJECTS.find(x=>x.id===id); if(!p) return "<p>Project not found.</p>";
+  return `<h2 style="margin-top:0">${p.title}</h2><p style="text-align:right"><b>Timeline:</b> ${p.timeline}</p>
+   <h3>Description</h3><p>${p.desc}</p><h3>Dev Details</h3><p>${p.details}</p>
+   <h3>Links</h3>${p.links.length?p.links.map(l=>`<div><a href="${l[1]}">${l[0]}</a></div>`).join(""):"<p>No links yet.</p>"}`;
+}
+function contactLinks(stack){
+  const a=[["Resume",CONTACT.resume],[CONTACT.email,"mailto:"+CONTACT.email],[CONTACT.phone,"tel:"+CONTACT.phone.replace(/\D/g,"")],[CONTACT.itch,CONTACT.itch],[CONTACT.insta,CONTACT.insta]];
+  const icons=["📄","✉️","📞","🎮","📷"];
+  return a.map((x,i)=>`<a href="${x[1]}" ${x[1].startsWith("http")?'target="_blank" rel="noopener"':""} style="margin:0 .8rem;white-space:nowrap">${icons[i]} ${x[0]}</a>`).join(stack?"":" ");
+}
+
+/* ---------- settings ---------- */
+const SET_DEF = {bg:"#FDC79F",header:"#FFFFFF",bubble:"#D9D9D9",menu:"#B0FFA8",btn1:"#62FF4F",btn2:"#D9D9D9",title:"#000000",subtitle:"#000000",body:"#111111",titleSize:2.6,subtitleSize:1.5,bodySize:1.05};
+let settings = Object.assign({},SET_DEF, safe(()=>JSON.parse(localStorage.getItem("settings")||"{}"),{}));
+function applySettings(){
+  const r=document.documentElement.style, s=settings;
+  ["bg","header","bubble","menu","btn1","btn2","title","subtitle","body"].forEach(k=>r.setProperty("--"+k,s[k]));
+  r.setProperty("--title-size",s.titleSize+"rem");r.setProperty("--subtitle-size",s.subtitleSize+"rem");r.setProperty("--body-size",s.bodySize+"rem");
+  safe(()=>localStorage.setItem("settings",JSON.stringify(s)));
+}
+function settingsView(){
+  const sizes=[["titleSize","Title Text Size",1.5,4],["subtitleSize","Subtitle Text Size",1,2.5],["bodySize","Body Text Size",.85,1.6]];
+  const cols=[["title","Title Text Colour"],["subtitle","Subtitle Text Colour"],["body","Body Text Colour"],["bg","Background Colour"],["header","Header Colour"],["bubble","Bubble Colour"],["menu","Menu Colour"],["btn1","Button Colour 1"],["btn2","Button Colour 2"]];
+  return sizes.map(([k,l,mn,mx])=>`<div class="setrow"><label for="s-${k}">${l}</label><input id="s-${k}" type="range" min="${mn}" max="${mx}" step=".05" value="${settings[k]}" data-k="${k}"></div>`).join("")
+   + cols.map(([k,l])=>`<div class="setrow"><label for="s-${k}">${l}</label><input id="s-${k}" type="color" value="${settings[k]}" data-k="${k}"></div>`).join("")
+   + `<p><button class="btn" id="reset">Reset to defaults</button></p>`;
+}
+
+/* ---------- router ---------- */
+function menu(cur){
+  $("#menu").innerHTML = Object.entries(PAGES).map(([k,[n,d]])=>`<a href="#${k}" class="${k===cur?"on":""}"><i>${n}</i>: ${d}</a>`).join("");
+}
+let timers=[];
+function route(){
+  timers.forEach(clearTimeout); timers=[];
+  const [page="tldr",sub] = location.hash.slice(1).split("/");
+  $("#menu").classList.remove("open");
+  const foot=$("#foot"), bar=$("#bar"), app=$("#app");
+  window.scrollTo(0,0);
+  if(page==="welcome"){
+    document.title="Nathan Alex Sequeira";
+    $("#avatar").src=PHOTOS.tldr; bar.innerHTML=""; foot.innerHTML="";
+    safe(()=>localStorage.setItem("seenWelcome","1"));
+    const lines=["Warning!","Just like any game, the design and scope of this project shifted during development.","This was supposed to be a portfolio.","It is not.","It became a library for my entire professional life story.","Don't worry, there is a TLDR page for my resume."];
+    app.innerHTML=`<div class="warn">${lines.map(l=>`<p class="fade">${l}</p>`).join("")}<a class="btn two" href="#tldr" style="font-size:1.2rem;padding:.8rem 3rem">Skip</a></div>`;
+    const ps=[...app.querySelectorAll(".fade")], step=1800;
+    const still=matchMedia("(prefers-reduced-motion: reduce)").matches;
+    ps.forEach((p,i)=>timers.push(setTimeout(()=>p.classList.add("show"),still?0:600+i*step)));
+    if(!still) timers.push(setTimeout(()=>{location.hash="#tldr"},600+ps.length*step+1500));
+    return;
+  }
+  if(!PAGES[page]){ location.hash="#tldr"; return; }
+  const [n,,sub2]=PAGES[page]; menu(page);
+  document.title=n+" | Nathan Alex Sequeira";
+  $("#avatar").src=PHOTOS[page];
+  const detail = page==="devlog" && sub;
+  bar.innerHTML=`<button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>`
+    +(detail?`<button class="back" onclick="location.hash='#devlog'">Back</button>`:"")
+    +(detail?"":`<h2><b>${n}:</b> ${sub2}</h2>`);
+  bar.querySelector(".burger").onclick=e=>{const o=$("#menu").classList.toggle("open");e.currentTarget.setAttribute("aria-expanded",o)};
+  app.innerHTML = detail ? project(sub) : page==="settings" ? settingsView() : VIEWS[page]();
+  foot.innerHTML = page==="settings"?"":contactLinks();
+  if(page==="quests") wire("list",QUESTS,q=>job(q),{Chronological:(a,b)=>b.start.localeCompare(a.start),Alphabetic:(a,b)=>a.org.localeCompare(b.org),Importance:(a,b)=>b.imp-a.imp});
+  if(page==="devlog"&&!sub) wire("grid",PROJECTS,card,{Chronological:(a,b)=>b.start.localeCompare(a.start),Popularity:(a,b)=>b.pop-a.pop,Alphabetic:(a,b)=>a.title.localeCompare(b.title)});
+  if(page==="settings"){
+    app.querySelectorAll("[data-k]").forEach(i=>i.addEventListener("input",()=>{settings[i.dataset.k]=i.type==="range"?+i.value:i.value;applySettings()}));
+    $("#reset").onclick=()=>{settings=Object.assign({},SET_DEF);applySettings();route()};
+  }
+}
+document.addEventListener("keydown",e=>{if(e.key==="Escape")$("#menu").classList.remove("open")});
+applySettings();
+if(!safe(()=>localStorage.getItem("seenWelcome"),null)) history.replaceState(null,"","#welcome"); // first visit starts on the warning
+addEventListener("hashchange",route);
+route();
+</script>
+</body>
+</html>
