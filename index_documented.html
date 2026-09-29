@@ -1,0 +1,2328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!--
+        =====================================================
+        HEAD: INFORMATION ABOUT THE PAGE
+        =====================================================
+
+        The <head> contains information the browser needs to
+        understand the page. Most of it is NOT displayed directly
+        as page content.
+
+        - charset: allows normal Unicode characters.
+        - viewport: makes the site behave properly on phones.
+        - title: text shown in the browser tab.
+        - Google Fonts: loads the decorative fonts used below.
+        =====================================================
+    -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+    <title>Nathan Alex Sequeira</title>
+
+    <!--
+        External fonts.
+        These are loaded from Google Fonts so the CSS can refer to
+        names such as "Cinzel" and "IM Fell English".
+    -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=IM+Fell+English:ital@0;1&family=EB+Garamond:ital,wght@0,400;0,700;1,400&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- =====================================================
+         CSS
+         ===================================================== -->
+    <style>
+/* =========================================================
+   PORTFOLIO WEBSITE - CSS
+   =========================================================
+   This section controls how the website LOOKS.
+
+   A useful mental model:
+   - HTML = the content/structure of the page
+   - CSS  = the appearance/layout of the page
+   - JS   = the behavior/interactivity of the page
+
+   The website uses CSS variables (the values beginning with --)
+   so that colors, fonts, and text sizes can be changed from one
+   central place. The Settings page also changes these variables.
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   1. GLOBAL THEME VARIABLES
+   --------------------------------------------------------- */
+:root {
+    --bg: #fbe6cc;
+    --hdr: #fff3e2;
+    --bub: #fff9ef;
+    --menu: #e7d9fa;
+    --b1: #5b2a9e;
+    --b2: #f08a24;
+    --on1: #fff;
+    --title: #2a1250;
+    --sub: #4a2a80;
+    --body: #2b1d3d;
+    --line: #2a1250;
+
+    /* Font variables. Change these in one place instead of
+       changing every heading/body rule individually. */
+    --fh: "Cinzel", "Times New Roman", serif;
+    --fb: "IM Fell English", Georgia, serif;
+
+    /* Default text sizes. The Settings page can modify these. */
+    --ts: 2.4rem;
+    --ss: 1.2rem;
+    --bs: 1.12rem;
+
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Automatically use a dark theme when the visitor's device/browser
+   prefers dark mode, unless the user has explicitly chosen Light. */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --bg: #1a0f2e;
+        --hdr: #26164a;
+        --bub: #2b1a52;
+        --menu: #382266;
+        --b1: #b18cff;
+        --b2: #ffa040;
+        --on1: #1a0f2e;
+        --title: #fff1e0;
+        --sub: #ead8ff;
+        --body: #eee4fb;
+        --line: #b18cff;
+    }
+}
+
+/* Explicit dark theme override. */
+:root[data-theme="dark"] {
+    --bg: #1a0f2e;
+    --hdr: #26164a;
+    --bub: #2b1a52;
+    --menu: #382266;
+    --b1: #b18cff;
+    --b2: #ffa040;
+    --on1: #1a0f2e;
+    --title: #fff1e0;
+    --sub: #ead8ff;
+    --body: #eee4fb;
+    --line: #b18cff;
+}
+
+/* ---------------------------------------------------------
+   2. BASIC / GLOBAL ELEMENT STYLES
+   --------------------------------------------------------- */
+html {
+    scroll-padding-top: env(safe-area-inset-top, 0px);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    color: var(--body);
+    font: var(--bs) / 1.6 var(--fb);
+
+    /* Two subtle radial gradients create the decorative background. */
+    background:
+        var(--bg)
+        radial-gradient(
+            circle at 15% 8%,
+            rgba(240, 138, 36, 0.16),
+            transparent 45%
+        ) fixed;
+
+    background-image:
+        radial-gradient(
+            circle at 15% 8%,
+            rgba(240, 138, 36, 0.16),
+            transparent 45%
+        ),
+        radial-gradient(
+            circle at 88% 92%,
+            rgba(91, 42, 158, 0.14),
+            transparent 50%
+        );
+
+    background-attachment: fixed;
+}
+
+h1,
+h2,
+h3 {
+    margin: 0;
+    line-height: 1.15;
+    letter-spacing: 0.03em;
+    font-family: var(--fh);
+    color: var(--title);
+}
+
+a {
+    color: var(--b1);
+    font-weight: 600;
+}
+
+button {
+    font: inherit;
+    cursor: pointer;
+    color: var(--title);
+}
+
+/* Visible keyboard focus indicator. This is important for accessibility. */
+:focus-visible {
+    outline: 3px solid var(--b2);
+    outline-offset: 2px;
+}
+
+/* ---------------------------------------------------------
+   3. HEADER
+   --------------------------------------------------------- */
+header {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 5;
+
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    padding: 0.7rem 1.2rem;
+    background: var(--hdr);
+    border-bottom: 6px double var(--line);
+}
+
+.av {
+    width: 64px;
+    height: 64px;
+    flex: none;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+    border: 3px solid var(--line);
+    background: var(--b1);
+    color: var(--on1);
+
+    font: 800 1.4rem var(--fh);
+}
+
+header h1 {
+    flex: 1;
+    text-align: center;
+    font-size: clamp(1.3rem, 4vw, 2.6rem);
+    font-weight: 800;
+}
+
+.roles {
+    text-align: right;
+    color: var(--sub);
+    font: 600 0.8rem / 1.5 var(--fh);
+    letter-spacing: 0.06em;
+}
+
+/* ---------------------------------------------------------
+   4. HAMBURGER BUTTON + SIDE MENU
+   --------------------------------------------------------- */
+#burger {
+    position: fixed;
+    left: 0.8rem;
+    top: calc(env(safe-area-inset-top, 0px) + 92px);
+    z-index: 6;
+
+    width: 46px;
+    height: 46px;
+
+    border: 3px solid var(--line);
+    border-radius: 12px;
+    background: var(--b2);
+
+    font-size: 1.4rem;
+    box-shadow: 3px 3px 0 var(--line);
+}
+
+#drawer {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+
+    display: none;
+    background: rgba(10, 12, 30, 0.45);
+}
+
+#drawer.on {
+    display: block;
+}
+
+#drawer nav {
+    width: min(340px, calc(100% - 2rem));
+    margin: calc(env(safe-area-inset-top, 0px) + 1rem) 0 1rem 1rem;
+    padding: 1rem;
+
+    display: grid;
+    gap: 0.6rem;
+
+    background: var(--menu);
+    border: 3px solid var(--line);
+    border-radius: 22px;
+    box-shadow: 6px 6px 0 var(--line);
+}
+
+#drawer nav button {
+    padding: 0.7rem 1rem;
+    border: 2px solid var(--line);
+    border-radius: 99px;
+    background: var(--bub);
+    text-align: center;
+    font-size: 1rem;
+}
+
+#drawer nav button[aria-current="true"] {
+    background: var(--b2);
+    color: #2a1250;
+}
+
+#drawer i {
+    font-weight: 700;
+}
+
+/* ---------------------------------------------------------
+   5. PAGE LAYOUT
+   --------------------------------------------------------- */
+main {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 1.5rem 1.2rem 2rem;
+}
+
+/* JavaScript switches .on between pages. */
+.page {
+    display: none;
+}
+
+.page.on {
+    display: block;
+}
+
+.pt {
+    margin: 0.2rem 0 1.5rem;
+    padding: 0 3rem;
+
+    text-align: center;
+    font-size: var(--ts);
+    font-weight: 800;
+}
+
+.pt small {
+    display: block;
+    margin-top: 0.4rem;
+    color: var(--sub);
+    font: 500 var(--ss) var(--fb);
+}
+
+/* Reusable "bubble" / content box. */
+.bub {
+    margin-bottom: 1.6rem;
+    padding: 1.2rem 1.4rem;
+
+    background: var(--bub);
+    border: 3px solid var(--line);
+    border-radius: 18px;
+    box-shadow: 5px 5px 0 var(--line);
+}
+
+h2 {
+    margin-bottom: 0.8rem;
+    color: var(--sub);
+    font-size: calc(var(--ss) * 1.3);
+}
+
+h3 {
+    color: var(--sub);
+    font-size: var(--ss);
+}
+
+/* ---------------------------------------------------------
+   6. REUSABLE UI COMPONENTS
+   --------------------------------------------------------- */
+
+/* Horizontal information/link bar. */
+.bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem 1.2rem;
+
+    padding: 0.9rem 0;
+    font-size: 0.9rem;
+}
+
+.bar span {
+    white-space: nowrap;
+}
+
+/* Filter/sort "pill" buttons. */
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+
+    margin: 0 0 1.2rem;
+}
+
+.chips b {
+    margin-right: 0.2rem;
+    color: var(--sub);
+}
+
+.chip {
+    padding: 0.25rem 0.85rem;
+    border: 2px solid var(--line);
+    border-radius: 99px;
+    background: var(--bub);
+    font-size: 0.9rem;
+}
+
+.chip[aria-pressed="true"] {
+    background: var(--b1);
+    color: var(--on1);
+    border-color: var(--line);
+}
+
+/* Main purple/orange buttons. */
+.btn {
+    padding: 0.5rem 1.2rem;
+    border: 3px solid var(--line);
+    border-radius: 12px;
+    background: var(--b1);
+    color: var(--on1);
+    font-weight: 600;
+    box-shadow: 3px 3px 0 var(--line);
+}
+
+.btn.alt {
+    background: var(--b2);
+    color: #2a1250;
+}
+
+/* ---------------------------------------------------------
+   7. SKILL CHART
+   --------------------------------------------------------- */
+.sk {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 0.35rem 0.8rem;
+    align-items: center;
+}
+
+.sk .lb {
+    text-align: right;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.trk {
+    height: 22px;
+    overflow: hidden;
+
+    background: color-mix(in srgb, var(--line) 12%, transparent);
+    border: 2px solid var(--line);
+    border-radius: 8px;
+}
+
+.fill {
+    width: 0;
+    height: 100%;
+
+    background-color: var(--b1);
+    background-image: repeating-linear-gradient(
+        90deg,
+        transparent 0 14px,
+        rgba(255, 255, 255, 0.35) 14px 16px
+    );
+
+    transition: width 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Orange bars are used for tools instead of programming languages. */
+.fill.t2 {
+    background-color: var(--b2);
+}
+
+.ax {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 0.8rem;
+
+    margin-bottom: 0.3rem;
+    color: var(--sub);
+    font-style: italic;
+    font-size: 0.85rem;
+}
+
+.ax div div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.gap {
+    height: 0.8rem;
+    grid-column: 1 / -1;
+}
+
+/* ---------------------------------------------------------
+   8. EXPERIENCE / PROJECT CONTENT
+   --------------------------------------------------------- */
+.job {
+    margin-bottom: 1.3rem;
+}
+
+.job h3 em,
+.job .r {
+    font-style: italic;
+    font-weight: 400;
+}
+
+.job ul {
+    margin: 0.4rem 0 0;
+    padding-left: 1.2rem;
+}
+
+.tree {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.tree li {
+    position: relative;
+
+    margin-left: 0.5rem;
+    padding: 0.1rem 0 0.1rem 1.6rem;
+
+    border-left: 3px solid var(--b1);
+}
+
+.tree li::before {
+    content: "";
+
+    position: absolute;
+    left: -3px;
+    top: 0.85rem;
+
+    width: 1.1rem;
+    border-top: 3px solid var(--b1);
+}
+
+.tree ul {
+    margin: 0.3rem 0;
+    padding: 0;
+    list-style: none;
+}
+
+.edu {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+/* Project cards. */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 1.4rem;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    background: var(--bub);
+    border: 3px solid var(--line);
+    border-radius: 18px;
+    box-shadow: 5px 5px 0 var(--line);
+}
+
+.card h3 {
+    padding: 0.8rem 1rem;
+    background: var(--menu);
+    border-bottom: 3px solid var(--line);
+}
+
+.thumb {
+    height: 130px;
+
+    display: grid;
+    place-items: center;
+
+    border-bottom: 3px solid var(--line);
+    color: #fff;
+    font: 800 2.6rem var(--fh);
+}
+
+.card .in {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+
+    padding: 1rem;
+    font-size: 0.95rem;
+}
+
+.card .in .btn {
+    margin-top: auto;
+    align-self: flex-end;
+}
+
+/* Detailed project information. */
+.dl {
+    display: grid;
+    gap: 0.9rem;
+}
+
+/* ---------------------------------------------------------
+   9. SETTINGS
+   --------------------------------------------------------- */
+.set {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 0.8rem 2rem;
+}
+
+.set label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.set select {
+    max-width: 60%;
+    padding: 0.3rem 0.5rem;
+
+    background: var(--bub);
+    border: 2px solid var(--line);
+    border-radius: 8px;
+
+    color: var(--title);
+    font: inherit;
+}
+
+.set input[type="color"] {
+    width: 52px;
+    height: 34px;
+    padding: 0;
+
+    background: none;
+    border: 2px solid var(--line);
+    border-radius: 8px;
+}
+
+/* ---------------------------------------------------------
+   10. INTRO SCREEN + FOOTER
+   --------------------------------------------------------- */
+#intro {
+    position: fixed;
+    inset: 0;
+    z-index: 30;
+
+    display: grid;
+    place-items: center;
+
+    padding: 1.5rem;
+    background: var(--bg);
+}
+
+#intro.off {
+    display: none;
+}
+
+#intro .bub {
+    max-width: 640px;
+    text-align: center;
+}
+
+#intro h2 {
+    color: var(--title);
+    font-size: 2rem;
+}
+
+footer {
+    background: var(--hdr);
+    border-top: 3px solid var(--line);
+}
+
+footer .bar {
+    max-width: 980px;
+    margin: 0 auto;
+}
+
+/* ---------------------------------------------------------
+   11. RESPONSIVE / ACCESSIBILITY RULES
+   --------------------------------------------------------- */
+
+/* On smaller screens, hide the role text and shrink the avatar/menu. */
+@media (max-width: 640px) {
+    .roles {
+        display: none;
+    }
+
+    .av {
+        width: 48px;
+        height: 48px;
+    }
+
+    #burger {
+        top: calc(env(safe-area-inset-top, 0px) + 76px);
+    }
+
+    .pt {
+        padding: 0 2.8rem;
+    }
+
+    .sk,
+    .ax {
+        grid-template-columns: 80px 1fr;
+    }
+}
+
+/* Users who request reduced motion should not see the skill bars animate. */
+@media (prefers-reduced-motion: reduce) {
+    .fill {
+        transition: none;
+    }
+}
+
+    </style>
+</head>
+
+<body>
+    <!--
+        =====================================================
+        INTRO / WELCOME SCREEN
+        =====================================================
+
+        This appears when the site is opened for the first time
+        in a browser session. JavaScript hides it after "Skip"
+        is clicked and remembers that choice with sessionStorage.
+        =====================================================
+    -->
+    <div id="intro">
+        <div class="bub">
+            <h2>Warning!</h2>
+
+            <p>
+                Just like any game, the design and scope of this
+                project shifted during development.
+            </p>
+
+            <p>
+                <b>
+                    This was supposed to be a portfolio. It is not.<br>
+                    It became a library for my entire professional life story.
+                </b>
+            </p>
+
+            <p>Don't worry, there is a TLDR page for my resume.</p>
+
+            <button class="btn" id="skip">Skip</button>
+        </div>
+    </div>
+
+    <!--
+        =====================================================
+        HEADER
+        =====================================================
+        This remains visible while navigating between the
+        different "pages" of the single-page website.
+    -->
+    <header>
+        <!-- Decorative initials. aria-hidden means screen readers ignore it. -->
+        <div class="av" aria-hidden="true">NS</div>
+
+        <h1>Nathan Alex Sequeira</h1>
+
+        <div class="roles">
+            Programmer<br>
+            Writer<br>
+            Classicist
+        </div>
+    </header>
+
+    <!--
+        Hamburger button.
+        JavaScript opens the navigation drawer when this is clicked.
+    -->
+    <button id="burger" aria-label="Open menu">☰</button>
+
+    <!--
+        =====================================================
+        NAVIGATION DRAWER
+        =====================================================
+
+        The <nav> starts empty on purpose.
+
+        JavaScript reads the PAGES array near the bottom of the
+        file and automatically creates the navigation buttons.
+        This means you only have to update PAGES instead of
+        manually maintaining the same menu in several places.
+        =====================================================
+    -->
+    <div id="drawer">
+        <nav aria-label="Main menu"></nav>
+    </div>
+
+    <!-- =====================================================
+         MAIN CONTENT
+         ===================================================== -->
+    <main>
+
+        <!-- =================================================
+             PAGE: TLDR / RESUME
+             ================================================= -->
+        <section class="page" id="tldr">
+            <h1 class="pt">
+                TLDR
+                <small>
+                    If you do not want to go through the rest of
+                    this website, here's the highlights.
+                </small>
+            </h1>
+
+            <!-- JavaScript inserts contact links here. -->
+            <div class="bar contact"></div>
+
+            <div class="bub">
+                <h2>About me</h2>
+                <p>
+                    I am who I am so hire me. Blah blah blah blah;
+                    yada yada yada yada. Other stuff one more paragraph
+                    before the end. Lorem ipsum dolor sit amet,
+                    consectetur adipiscing elit. In a tortor ut nisl
+                    luctus tempus non nec nulla.
+                </p>
+            </div>
+
+            <div class="bub">
+                <h2>Proficiency in programming languages and tools</h2>
+
+                <!-- JavaScript generates the skill chart. -->
+                <div class="chart"></div>
+            </div>
+
+            <h2>My recent work and volunteer experience</h2>
+
+            <!-- JavaScript inserts selected experience here. -->
+            <div class="bub" id="tl-exp"></div>
+
+            <h2>My best projects</h2>
+
+            <!-- JavaScript inserts project information here. -->
+            <div class="bub" id="tl-proj"></div>
+        </section>
+
+        <!-- =================================================
+             PAGE: SKILL TREE / EDUCATION
+             ================================================= -->
+        <section class="page" id="skills">
+            <h1 class="pt">
+                Skill Tree
+                <small>My educational history and knowledge</small>
+            </h1>
+
+            <div class="bub">
+                <!--
+                    Nested <ul> elements create the visual
+                    education/knowledge tree.
+                -->
+                <ul class="tree">
+                    <li>
+                        <div class="edu">
+                            <div>
+                                <b>MacEwan University</b> (2023 – Present)
+                            </div>
+
+                            <a href="#">Transcript</a>
+                        </div>
+
+                        <ul>
+                            <li>
+                                <i>Computer Science</i> major
+
+                                <ul>
+                                    <li>
+                                        Specializing in
+                                        <i>Game Development</i>
+                                    </li>
+                                    <li>
+                                        Specializing in
+                                        <i>Information Security</i>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <i>Classical History</i> minor
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <div class="edu">
+                            <div>
+                                <b>St. Francis Xavier High</b> (2020 – 2023)
+                            </div>
+
+                            <a href="#">Academic Report</a>
+                        </div>
+
+                        <ul>
+                            <li>High school diploma</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bub">
+                <h2>Proficiency in programming languages and tools</h2>
+                <div class="chart"></div>
+            </div>
+        </section>
+
+        <!-- =================================================
+             PAGE: SIDE QUESTS / EXPERIENCE
+             ================================================= -->
+        <section class="page" id="quests">
+            <h1 class="pt">
+                Side Quests
+                <small>My work and volunteer experience</small>
+            </h1>
+
+            <!-- JavaScript creates the sorting/filtering controls. -->
+            <div class="chips" id="q-sort">
+                <b>Sort</b>
+            </div>
+
+            <div class="chips" id="q-filter">
+                <b>Filter</b>
+            </div>
+
+            <!-- JavaScript inserts the experience entries here. -->
+            <div id="q-list"></div>
+        </section>
+
+        <!-- =================================================
+             PAGE: DEV LOG / PROJECTS
+             ================================================= -->
+        <section class="page" id="devlog">
+            <h1 class="pt">
+                Dev Log
+                <small>
+                    My various projects along with dev reports where possible
+                </small>
+            </h1>
+
+            <div class="chips" id="d-sort">
+                <b>Sort</b>
+            </div>
+
+            <div class="chips" id="d-filter">
+                <b>Filter</b>
+            </div>
+
+            <!-- JavaScript inserts project cards here. -->
+            <div class="grid" id="d-list"></div>
+        </section>
+
+        <!-- =================================================
+             PAGE: PROJECT DETAIL
+             =================================================
+
+             This page is reused for every project. JavaScript
+             replaces the text inside these elements when the
+             visitor clicks "More info".
+             ================================================= -->
+        <section class="page" id="detail">
+            <button class="btn alt" id="back">← Back</button>
+
+            <h1 class="pt" id="dt-title"></h1>
+
+            <div class="bub dl">
+                <div>
+                    <h3>Timeline</h3>
+                    <span id="dt-time"></span>
+                </div>
+
+                <div>
+                    <h3>Description</h3>
+                    <span id="dt-desc"></span>
+                </div>
+
+                <div>
+                    <h3>Dev details</h3>
+                    <span id="dt-dev"></span>
+                </div>
+
+                <div>
+                    <h3>Links</h3>
+                    <span id="dt-links"></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================================
+             PAGE: CONTACT
+             ================================================= -->
+        <section class="page" id="contact">
+            <h1 class="pt">
+                Contact
+                <small>My socials</small>
+            </h1>
+
+            <div class="bub">
+                <!-- JavaScript inserts the same contact list used elsewhere. -->
+                <div
+                    class="bar contact"
+                    style="flex-direction: column; align-items: center; font-size: 1.1rem;"
+                ></div>
+            </div>
+        </section>
+
+        <!-- =================================================
+             PAGE: SETTINGS
+             ================================================= -->
+        <section class="page" id="settings">
+            <h1 class="pt">
+                Settings
+                <small>
+                    I'm colourblind, so if you don't like my choices,
+                    you may change them.
+                </small>
+            </h1>
+
+            <div class="bub">
+                <!-- JavaScript generates the settings controls. -->
+                <div class="set" id="set"></div>
+
+                <p>
+                    <button class="btn alt" id="reset">
+                        Reset to defaults
+                    </button>
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!--
+        =====================================================
+        FOOTER
+        =====================================================
+        Contact information is inserted here by JavaScript.
+    -->
+    <footer>
+        <div class="bar contact"></div>
+    </footer>
+
+    <!-- =====================================================
+         JAVASCRIPT
+         =====================================================
+
+         This is where the website's BEHAVIOR lives.
+
+         The code is organized into these parts:
+
+         1. Website data
+         2. Small helper functions
+         3. Skill chart
+         4. Experience sorting/filtering
+         5. Project sorting/filtering
+         6. Page navigation
+         7. Initial page setup
+         8. Settings system
+         9. Final startup/navigation logic
+
+         JavaScript can look intimidating at first. The important
+         thing to remember is that much of this file is simply
+         DATA stored in arrays/objects, followed by FUNCTIONS
+         that display that data.
+         ===================================================== -->
+    <script>
+
+        /* =====================================================
+           1. WEBSITE DATA
+           =====================================================
+
+           These arrays are essentially the website's database.
+
+           If you are updating your resume/portfolio, you will
+           usually edit THIS section rather than the HTML above.
+           ===================================================== */
+
+        /*
+            PAGES controls the navigation menu.
+
+            Each entry follows this pattern:
+
+                [HTML id, menu title, menu description]
+
+            Example:
+                ["tldr", "TLDR", "My Resume"]
+
+            The first value MUST match a section's id attribute.
+        */
+        var PAGES = [
+            ["tldr", "TLDR", "My Resume"],
+            ["skills", "Skill Tree", "My Education"],
+            ["quests", "Side Quests", "My Experience"],
+            ["devlog", "Dev Log", "My Projects"],
+            ["contact", "Contact", "My Socials"],
+            ["settings", "Settings", "I'm Colourblind"]
+        ];
+
+        /*
+            LANG contains programming languages and tools.
+
+            Each normal entry looks like:
+
+                ["Name", proficiency]
+
+            The proficiency is a number from 0 to 1.
+
+                1    = 100%
+                0.5  = 50%
+                0.25 = 25%
+
+            The standalone 0 separates programming languages
+            from tools in the chart.
+        */
+        var LANG = [
+            ["C#", 1],
+            ["Python", 1],
+            ["C", 0.55],
+            ["Small Basic", 0.37],
+            ["SQL", 0.37],
+            ["Assembly", 0.24],
+            ["Kotlin", 0.14],
+
+            /* 0 creates a visual gap in the chart. */
+            0,
+
+            ["Unity", 0.65],
+            ["Figma", 0.55],
+            ["Android Studio", 0.2],
+            ["Godot", 0.18]
+        ];
+
+        /*
+            EXP = Experience.
+
+            Each object represents one job/volunteer position.
+
+            Important properties:
+            - o = organization
+            - r = role
+            - d = date displayed to the visitor
+            - k = chronological sorting key
+            - i = importance sorting value
+            - t = tags used by filters
+            - b = bullet points
+            - l = optional external link
+
+            Keeping this information in JavaScript makes it much
+            easier to add/remove experience entries later.
+        */
+        var EXP = [
+            {
+                o: "MacEwan University",
+                r: "Open Lab Teaching Assistant",
+                d: "Sep 2026 – Present",
+                k: 202609,
+                i: 6,
+                t: ["Work", "CS", "Tutor"],
+                b: [
+                    "Assist students across four computer science courses with programming assignments during open lab hours.",
+                    "Guide students through problem-solving by helping them develop their own solutions rather than giving answers.",
+                    "Provide one-on-one support, adapting explanations to different experience levels."
+                ]
+            },
+
+            {
+                o: "MacEwan Cybersecurity Club",
+                r: "Event Coordinator",
+                d: "Sep 2026 – Present",
+                k: 202608,
+                i: 4,
+                t: ["Volunteer", "CS"],
+                b: [
+                    "Plan and coordinate cybersecurity events, including logistics and scheduling.",
+                    "Helped found the club's annual MacEwan CTF, a recurring competition for students."
+                ],
+                l: "https://clubeh.ca/"
+            },
+
+            {
+                o: "MacEwan Game Dev Club",
+                r: "President (Apr 2026 – Present), Secretary (Apr 2025 – Apr 2026)",
+                d: "Apr 2025 – Present",
+                k: 202604,
+                i: 10,
+                t: ["Volunteer", "CS"],
+                b: [
+                    "Helped grow the club from a newly established group into a community of over 400 members, recognized as New Student Group of the Year.",
+                    "Founded the monthly workshop series and the annual MacEwan Game Showcase; co-founded the bi-monthly Qubit's Holiday Challenges.",
+                    "Primary organizer of the annual MacEwan Game Jam, whose second edition grew to more than three times the size of the first and gained external sponsors.",
+                    "Manage documentation, correspondence, and executive communication; support student-led game projects."
+                ],
+                l: "https://macewangdc.carrd.co/"
+            },
+
+            {
+                o: "MacEwan Computer Science Club",
+                r: "Secretary",
+                d: "Apr 2026 – Present",
+                k: 202603,
+                i: 8,
+                t: ["Volunteer", "CS"],
+                b: [
+                    "Joined the executive team to revive the club after about three years of inactivity.",
+                    "Reorganized the club's Google Drive and archives; documented meetings and decisions.",
+                    "Worked with the CS Department to clean and restock the CS student space.",
+                    "Help plan academic and networking events connecting students with peers, faculty, and industry."
+                ],
+                l: "https://macewancsclub.ca/"
+            },
+
+            {
+                o: "Home Depot",
+                r: "Tool Rental Associate (Apr – Aug 2026), Front-End Cashier (Apr – Aug 2025)",
+                d: "Apr 2025 – Aug 2026",
+                k: 202504,
+                i: 3,
+                t: ["Work", "Cashier"],
+                b: [
+                    "Delivered accurate customer service in a high-volume retail environment.",
+                    "Handled rentals, returns, and transactions with attention to accountability.",
+                    "Kept the front-end and rental area organized in a fast-paced setting."
+                ]
+            },
+
+            {
+                o: "Dairy Queen",
+                r: "Cashier",
+                d: "Apr – Oct 2024",
+                k: 202404,
+                i: 1,
+                t: ["Work", "Cashier"],
+                b: [
+                    "Took orders, answered questions, and resolved customer concerns.",
+                    "Handled cash and electronic transactions accurately during busy periods."
+                ]
+            },
+
+            {
+                o: "Self-Employed",
+                r: "Math & Computer Science Tutor",
+                d: "Jul 2022 – Dec 2024",
+                k: 202207,
+                i: 5,
+                t: ["Work", "Tutor", "CS"],
+                b: [
+                    "Provided one-on-one tutoring in mathematics and computer science.",
+                    "Adapted explanations to each student's learning style and taught problem-solving strategies they could apply independently."
+                ]
+            }
+        ];
+
+        /*
+            PRJ = Projects.
+
+            Each object represents a portfolio project.
+
+            Important properties:
+            - n  = project name
+            - ty = project type
+            - d  = timeline
+            - k  = chronological sorting key
+            - p  = popularity/importance sorting value
+            - t  = filter tags
+            - c  = thumbnail background colour
+            - s  = short summary
+            - b  = detailed bullet points
+            - dev = development details
+            - L  = links; each link is [label, URL]
+        */
+        var PRJ = [
+            {
+                n: "Jasper Adams and the Hunt for the Golden Maple Syrup",
+                ty: "Platformer",
+                d: "2026/02 – 2026/04",
+                k: 202602,
+                p: 3,
+                t: ["Games"],
+                c: "#5b2a9e",
+                s: "2D Unity platformer built as lead programmer and writer for CMPT 330 Intro to Game Dev.",
+                b: [
+                    "Developed a 2D platformer in Unity as lead programmer and writer.",
+                    "Implemented core gameplay systems, level design, and player mechanics using Unity for the first time.",
+                    "Conducted user testing and am pursuing publication of academic papers on the effects of surprise and frustration on different player types."
+                ],
+                dev: "Development report coming soon.",
+                L: [
+                    ["Downloadable", "https://king-nas.itch.io/jasper-adams"],
+                    ["Trailer", "https://www.instagram.com/p/DXAZ-yVkgBz/"]
+                ]
+            },
+
+            {
+                n: "Duck Duck Defer",
+                ty: "Scheduling & Messaging App",
+                d: "2026/01 – 2026/04",
+                k: 202601,
+                p: 2,
+                t: ["Apps"],
+                c: "#b45a00",
+                s: "Android scheduling and messaging app; 1st place in a class competition sponsored by IEEE.",
+                b: [
+                    "Served as Co-Scrum Master and Lead Architect for CMPT 395 Software Engineering.",
+                    "Designed and implemented most of the backend logic and database architecture in Android Studio and Firebase.",
+                    "Coordinated sprint planning, task delegation, and progress tracking using Agile methods."
+                ],
+                dev: "See the developer guide.",
+                L: [
+                    [
+                        "Developer Guide",
+                        "https://drive.google.com/file/d/1RfjSegi2o7HjH6-CXKTZSTkUGbh4Vc_3/view?usp=drive_link"
+                    ],
+                    ["Trailer", "https://www.instagram.com/p/DXAGK6zDtzF/"]
+                ]
+            },
+
+            {
+                n: "Cleophon: Rebuilding Athens",
+                ty: "VR Historical Simulator / Education Game",
+                d: "2025/12 – 2028/04",
+                k: 202512,
+                p: 1,
+                t: ["Games", "Research"],
+                c: "#7a3fb8",
+                s: "A VR simulator that immerses players in the life of a Classical-period Athenian.",
+                b: [
+                    "Designed for a research essay in CLAS 270 Intro to Greek Civilization; I plan to develop it as my CMPT 498 Capstone Project.",
+                    "The GDD won 3rd place at the MacEwan University Humanities Research Showcase.",
+                    "Goal: publish research on how VR can assist education, then keep building it into a fully publishable VR game."
+                ],
+                dev: "Game design document and research paper in progress.",
+                L: []
+            }
+        ];
+
+        /*
+            CONTACT stores the links shown in the footer,
+            TLDR page, and Contact page.
+
+            Each entry:
+                [icon, label, URL]
+        */
+        var CONTACT = [
+            ["📄", "Resume", "#"],
+            ["✉️", "nathanseq12@gmail.com", "mailto:nathanseq12@gmail.com"],
+            ["📞", "(780) 242-7852", "tel:+17802427852"],
+            ["🎮", "king-nas.itch.io", "https://king-nas.itch.io/"],
+            ["📷", "instagram.com/king_n.a.s", "https://www.instagram.com/king_n.a.s/"]
+        ];
+
+
+        /* =====================================================
+           2. SMALL HELPER FUNCTIONS
+           ===================================================== */
+
+        /*
+            $() is a shortcut for document.querySelector().
+
+            Instead of writing:
+                document.querySelector("#burger")
+
+            we can write:
+                $("#burger")
+
+            The second parameter lets us search inside another
+            element instead of the entire document.
+        */
+        var $ = function (selector, root) {
+            return (root || document).querySelector(selector);
+        };
+
+        /*
+            $$() is a shortcut for document.querySelectorAll().
+
+            querySelectorAll() returns a NodeList. Array.prototype.slice
+            converts it into a normal array so methods such as .map()
+            and .filter() can be used more easily.
+        */
+        var $$ = function (selector, root) {
+            return [].slice.call(
+                (root || document).querySelectorAll(selector)
+            );
+        };
+
+
+        /* =====================================================
+           3. SKILL CHART
+           ===================================================== */
+
+        /*
+            chart() creates the HTML for the skill chart.
+
+            It loops through LANG and creates:
+                label + background track + coloured fill
+
+            The actual width is stored in data-w and animated later
+            by grow().
+        */
+        function chart() {
+            var html =
+                '<div class="ax">' +
+                    '<span></span>' +
+                    '<div>' +
+                        '<div>' +
+                            '<span>Beginner</span>' +
+                            '<span>Intermediate</span>' +
+                            '<span>Advanced</span>' +
+                            '<span>Expert</span>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>' +
+                '<div class="sk">';
+
+            LANG.forEach(function (entry) {
+                /* A 0 entry means "insert a visual gap". */
+                if (!entry) {
+                    html += '<div class="gap"></div>';
+                    return;
+                }
+
+                /*
+                    LANG entries after the separator are treated
+                    as tools, so they receive the orange style.
+                */
+                var tool = LANG.indexOf(entry) > 7;
+
+                html +=
+                    '<div class="lb">' + entry[0] + '</div>' +
+                    '<div class="trk">' +
+                        '<div class="fill' +
+                            (tool ? ' t2' : '') +
+                            '" data-w="' +
+                            entry[1] * 100 +
+                            '">' +
+                        '</div>' +
+                    '</div>';
+            });
+
+            return html + "</div>";
+        }
+
+        /*
+            grow() animates skill bars after a page becomes visible.
+
+            The small delay gives the browser time to render the
+            page before changing width from 0 to the target value.
+        */
+        function grow() {
+            setTimeout(function () {
+                $$(".page.on .fill").forEach(function (fill) {
+                    fill.style.width = fill.dataset.w + "%";
+                });
+            }, 60);
+        }
+
+
+        /* =====================================================
+           4. EXPERIENCE DISPLAY
+           ===================================================== */
+
+        /*
+            job() converts one EXP object into an HTML experience entry.
+        */
+        function job(experience) {
+            return (
+                '<div class="job">' +
+                    '<h3>' +
+                        experience.o +
+                        ', <span class="r">' +
+                        experience.r +
+                        "</span> (" +
+                        experience.d +
+                        ")" +
+                    "</h3>" +
+
+                    "<ul>" +
+
+                        experience.b.map(function (bullet) {
+                            return "<li>" + bullet + "</li>";
+                        }).join("") +
+
+                        /*
+                            Only add a link if the experience object
+                            actually contains one.
+                        */
+                        (experience.l
+                            ? '<li><a href="' +
+                                experience.l +
+                                '">' +
+                                experience.l +
+                              "</a></li>"
+                            : "") +
+
+                    "</ul>" +
+                "</div>"
+            );
+        }
+
+
+        /* =====================================================
+           5. SORTING / FILTER BUTTONS
+           ===================================================== */
+
+        /*
+            chips() creates a group of pill-shaped buttons.
+
+            Parameters:
+            - id     = container to put the buttons inside
+            - opts   = button names
+            - multi  = whether multiple buttons may be selected
+            - cb     = function to run after selection changes
+            - init   = initially selected button
+
+            This is used by both Experience and Projects.
+        */
+        function chips(id, options, multi, callback, initial) {
+            var box = $(id);
+
+            options.forEach(function (option) {
+                var button = document.createElement("button");
+
+                button.className = "chip";
+                button.textContent = option;
+
+                button.setAttribute(
+                    "aria-pressed",
+                    option === initial
+                );
+
+                button.onclick = function () {
+                    if (multi) {
+                        /*
+                            Toggle this button without changing
+                            the other selected filters.
+                        */
+                        button.setAttribute(
+                            "aria-pressed",
+                            button.getAttribute("aria-pressed") !== "true"
+                        );
+                    } else {
+                        /*
+                            For sorting, only one option can be active.
+                        */
+                        $$(".chip", box).forEach(function (otherButton) {
+                            otherButton.setAttribute(
+                                "aria-pressed",
+                                otherButton === button
+                            );
+                        });
+                    }
+
+                    callback();
+                };
+
+                box.appendChild(button);
+            });
+        }
+
+        /*
+            on() returns the currently selected chip labels
+            inside a particular control group.
+        */
+        function on(id) {
+            return $$(id + " .chip")
+                .filter(function (button) {
+                    return button.getAttribute("aria-pressed") === "true";
+                })
+                .map(function (button) {
+                    return button.textContent;
+                });
+        }
+
+
+        /* =====================================================
+           6. EXPERIENCE SORTING + FILTERING
+           ===================================================== */
+
+        function drawQ() {
+            var sort = on("#q-sort")[0];
+            var filters = on("#q-filter");
+
+            /*
+                Start with every experience entry, then remove
+                entries that do not match the selected filters.
+            */
+            var list = EXP.filter(function (experience) {
+                return (
+                    !filters.length ||
+                    experience.t.some(function (tag) {
+                        return filters.indexOf(tag) > -1;
+                    })
+                );
+            });
+
+            /*
+                Sort the remaining entries.
+
+                Chronological:
+                    highest k value first
+
+                Alphabetic:
+                    organization name A-Z
+
+                Importance:
+                    highest importance first
+            */
+            list.sort(
+                sort === "Alphabetic"
+                    ? function (a, b) {
+                        return a.o.localeCompare(b.o);
+                    }
+                    : sort === "Importance"
+                        ? function (a, b) {
+                            return b.i - a.i;
+                        }
+                        : function (a, b) {
+                            return b.k - a.k;
+                        }
+            );
+
+            /*
+                Replace the contents of q-list with the newly
+                filtered/sorted HTML.
+            */
+            $("#q-list").innerHTML =
+                list
+                    .map(function (experience) {
+                        return (
+                            '<div class="bub">' +
+                                job(experience).replace(
+                                    'class="job"',
+                                    ""
+                                ) +
+                            "</div>"
+                        );
+                    })
+                    .join("") ||
+                "<p>No quests match those filters. Clear a filter to see more.</p>";
+        }
+
+
+        /* =====================================================
+           7. PROJECT SORTING + FILTERING
+           ===================================================== */
+
+        function drawD() {
+            var sort = on("#d-sort")[0];
+            var filters = on("#d-filter");
+
+            var list = PRJ.filter(function (project) {
+                return (
+                    !filters.length ||
+                    filters.some(function (tag) {
+                        return (
+                            project.t.indexOf(tag) > -1 ||
+                            (
+                                tag === "CS" &&
+                                (
+                                    project.t.indexOf("Games") > -1 ||
+                                    project.t.indexOf("Apps") > -1
+                                )
+                            ) ||
+                            (
+                                tag === "Writings" &&
+                                project.t.indexOf("Research") > -1
+                            )
+                        );
+                    })
+                );
+            });
+
+            /*
+                Sort projects according to the selected option.
+            */
+            list.sort(
+                sort === "Alphabetic"
+                    ? function (a, b) {
+                        return a.n.localeCompare(b.n);
+                    }
+                    : sort === "Popularity"
+                        ? function (a, b) {
+                            return b.p - a.p;
+                        }
+                        : function (a, b) {
+                            return b.k - a.k;
+                        }
+            );
+
+            /*
+                Build a card for each project.
+            */
+            $("#d-list").innerHTML =
+                list
+                    .map(function (project) {
+                        var index = PRJ.indexOf(project);
+
+                        return (
+                            '<article class="card">' +
+
+                                "<h3>" +
+                                    project.n +
+                                "</h3>" +
+
+                                '<div class="thumb" style="background:' +
+                                    project.c +
+                                '">' +
+                                    project.n.charAt(0) +
+                                "</div>" +
+
+                                '<div class="in">' +
+
+                                    "<div><b>Summary:</b> " +
+                                        project.s +
+                                    "</div>" +
+
+                                    "<div><b>Timeline:</b> " +
+                                        project.d +
+                                    "</div>" +
+
+                                    "<div><b>Link:</b> " +
+                                        (
+                                            project.L[0]
+                                                ? '<a href="' +
+                                                    project.L[0][1] +
+                                                  '">' +
+                                                    project.L[0][0] +
+                                                  "</a>"
+                                                : "Not yet available"
+                                        ) +
+                                    "</div>" +
+
+                                    '<button class="btn" data-i="' +
+                                        index +
+                                    '">' +
+                                        "More info" +
+                                    "</button>" +
+
+                                "</div>" +
+                            "</article>"
+                        );
+                    })
+                    .join("") ||
+                "<p>No projects match those filters.</p>";
+
+            /*
+                The project cards were just created, so now we
+                attach click events to their "More info" buttons.
+            */
+            $$("#d-list .btn").forEach(function (button) {
+                button.onclick = function () {
+                    var project = PRJ[button.dataset.i];
+
+                    /*
+                        Fill the reusable project-detail page
+                        with this project's information.
+                    */
+                    $("#dt-title").textContent = project.n;
+                    $("#dt-time").textContent = project.d;
+
+                    $("#dt-desc").innerHTML =
+                        project.ty +
+                        ".<ul>" +
+                            project.b
+                                .map(function (bullet) {
+                                    return "<li>" + bullet + "</li>";
+                                })
+                                .join("") +
+                        "</ul>";
+
+                    $("#dt-dev").textContent = project.dev;
+
+                    $("#dt-links").innerHTML =
+                        project.L
+                            .map(function (link) {
+                                return (
+                                    '<a href="' +
+                                        link[1] +
+                                    '">' +
+                                        link[0] +
+                                    "</a>"
+                                );
+                            })
+                            .join(" &nbsp; ") ||
+                        "None yet";
+
+                    /* Show the detail page. */
+                    go("detail", 1);
+                };
+            });
+        }
+
+
+        /* =====================================================
+           8. PAGE NAVIGATION
+           ===================================================== */
+
+        /*
+            go(id) changes which .page is visible.
+
+            Example:
+                go("devlog")
+
+            makes #devlog visible and hides every other page.
+
+            keep controls whether the URL hash is changed.
+        */
+        function go(id, keep) {
+            $$(".page").forEach(function (page) {
+                page.classList.toggle(
+                    "on",
+                    page.id === id
+                );
+            });
+
+            /*
+                Highlight the current navigation button.
+                The detail page belongs conceptually to Dev Log.
+            */
+            $$("#drawer nav button").forEach(function (button) {
+                button.setAttribute(
+                    "aria-current",
+                    button.dataset.p ===
+                        (id === "detail" ? "devlog" : id)
+                );
+            });
+
+            /* Close the menu after navigating. */
+            $("#drawer").classList.remove("on");
+
+            /* Return to the top of the page. */
+            window.scrollTo(0, 0);
+
+            /*
+                Update the URL hash unless the caller specifically
+                requested that we keep the existing hash.
+            */
+            if (!keep) {
+                try {
+                    history.replaceState(null, "", "#" + id);
+                } catch (error) {
+                    /*
+                        Some restricted browser environments may
+                        prevent history manipulation. The site still
+                        works without it, so we intentionally ignore it.
+                    */
+                }
+            }
+
+            /* Animate the skill bars on the newly visible page. */
+            grow();
+        }
+
+
+        /* =====================================================
+           9. INITIAL PAGE SETUP
+           ===================================================== */
+
+        /*
+            Generate every skill chart.
+            There are currently two .chart elements:
+                - TLDR
+                - Skill Tree
+        */
+        $$(".chart").forEach(function (chartContainer) {
+            chartContainer.innerHTML = chart();
+        });
+
+        /*
+            Generate every contact block from CONTACT.
+            This avoids manually copying the same links into
+            the footer, TLDR, and Contact page.
+        */
+        $$(".contact").forEach(function (contactContainer) {
+            contactContainer.innerHTML =
+                CONTACT
+                    .map(function (contact) {
+                        return (
+                            "<span>" +
+                                contact[0] +
+                                ' <a href="' +
+                                contact[2] +
+                                '">' +
+                                contact[1] +
+                                "</a>" +
+                            "</span>"
+                        );
+                    })
+                    .join("");
+        });
+
+        /*
+            The TLDR page only shows selected recent experience.
+            The original order here is intentionally preserved.
+        */
+        $("#tl-exp").innerHTML =
+            EXP
+                .slice(2, 4)
+                .concat(EXP[0])
+                .map(function (experience) {
+                    return job(experience);
+                })
+                .join("");
+
+        /*
+            Generate the project list shown on the TLDR page.
+        */
+        $("#tl-proj").innerHTML =
+            PRJ
+                .map(function (project) {
+                    return (
+                        '<div class="job">' +
+
+                            "<h3>" +
+                                project.n +
+                                ', <span class="r">' +
+                                    project.ty +
+                                "</span> (" +
+                                    project.d +
+                                ")" +
+                            "</h3>" +
+
+                            "<ul>" +
+
+                                project.b
+                                    .map(function (bullet) {
+                                        return "<li>" + bullet + "</li>";
+                                    })
+                                    .join("") +
+
+                                project.L
+                                    .map(function (link) {
+                                        return (
+                                            "<li>" +
+                                                link[0] +
+                                                ': <a href="' +
+                                                link[1] +
+                                                '">' +
+                                                link[1] +
+                                                "</a></li>"
+                                        );
+                                    })
+                                    .join("") +
+
+                            "</ul>" +
+                        "</div>"
+                    );
+                })
+                .join("");
+
+        /*
+            Build the navigation menu from PAGES.
+        */
+        var nav = $("#drawer nav");
+
+        PAGES.forEach(function (page) {
+            var button = document.createElement("button");
+
+            button.dataset.p = page[0];
+            button.innerHTML =
+                "<i>" + page[1] + "</i>: " + page[2];
+
+            button.onclick = function () {
+                go(page[0]);
+            };
+
+            nav.appendChild(button);
+        });
+
+
+        /* =====================================================
+           10. MENU + INTRO EVENT HANDLERS
+           ===================================================== */
+
+        /* Open the navigation drawer. */
+        $("#burger").onclick = function () {
+            $("#drawer").classList.add("on");
+        };
+
+        /*
+            Clicking the dark area outside the navigation panel
+            closes the drawer.
+        */
+        $("#drawer").onclick = function (event) {
+            if (event.target.id === "drawer") {
+                $("#drawer").classList.remove("on");
+            }
+        };
+
+        /*
+            Escape is another way to close the menu.
+            This improves keyboard usability.
+        */
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape") {
+                $("#drawer").classList.remove("on");
+            }
+        });
+
+        /*
+            Skip the intro screen and remember the choice for
+            the current browser session.
+        */
+        $("#skip").onclick = function () {
+            $("#intro").classList.add("off");
+
+            try {
+                sessionStorage.setItem("seen", "1");
+            } catch (error) {
+                /* Session storage may be unavailable; the site still works. */
+            }
+        };
+
+        /*
+            If the visitor already skipped the intro during this
+            browser session, hide it immediately.
+        */
+        try {
+            if (sessionStorage.getItem("seen")) {
+                $("#intro").classList.add("off");
+            }
+        } catch (error) {
+            /* Ignore storage errors. */
+        }
+
+        /*
+            Return from project details to the Dev Log.
+        */
+        $("#back").onclick = function () {
+            go("devlog");
+        };
+
+
+        /* =====================================================
+           11. CREATE SORT + FILTER CONTROLS
+           ===================================================== */
+
+        /*
+            Experience:
+            - One sorting option at a time.
+            - Multiple filters can be active at once.
+        */
+        chips(
+            "#q-sort",
+            ["Chronological", "Alphabetic", "Importance"],
+            0,
+            drawQ,
+            "Chronological"
+        );
+
+        chips(
+            "#q-filter",
+            ["Work", "Volunteer", "CS", "Cashier", "Tutor"],
+            1,
+            drawQ
+        );
+
+        /*
+            Projects:
+            - One sorting option at a time.
+            - Multiple filters can be active at once.
+        */
+        chips(
+            "#d-sort",
+            ["Chronological", "Popularity", "Alphabetic"],
+            0,
+            drawD,
+            "Chronological"
+        );
+
+        chips(
+            "#d-filter",
+            ["CS", "Games", "Apps", "Writings", "Research", "Story"],
+            1,
+            drawD
+        );
+
+        /*
+            Draw the initial versions of the experience/project lists.
+        */
+        drawQ();
+        drawD();
+
+
+        /* =====================================================
+           12. SETTINGS SYSTEM
+           ===================================================== */
+
+        /*
+            FONTS contains the choices shown in the font dropdowns.
+
+            Each entry:
+                [name shown to user, actual CSS value]
+        */
+        var FONTS = [
+            ["Cinzel (inscription)", '"Cinzel","Times New Roman",serif'],
+            ["IM Fell English (old print)", '"IM Fell English",Georgia,serif'],
+            ["EB Garamond (classic book)", '"EB Garamond",Garamond,serif'],
+            ["Atkinson Hyperlegible (easy to read)", '"Atkinson Hyperlegible",Verdana,sans-serif'],
+            ["Georgia", "Georgia,serif"],
+            ["System sans-serif", "system-ui,sans-serif"],
+            ["Monospace", "ui-monospace,Menlo,monospace"]
+        ];
+
+        /*
+            SET defines every customizable CSS variable.
+
+            Each entry begins:
+                [label shown to user, CSS variable, control type]
+
+            Range controls then have:
+                minimum, maximum, step, unit
+
+            Example:
+                ["Title text size", "--ts", "range", 1.6, 3.4, .1, "rem"]
+        */
+        var SET = [
+            ["Title font", "--fh", "select"],
+            ["Body font", "--fb", "select"],
+
+            ["Title text size", "--ts", "range", 1.6, 3.4, 0.1, "rem"],
+            ["Subtitle text size", "--ss", "range", 0.9, 1.8, 0.05, "rem"],
+            ["Body text size", "--bs", "range", 0.85, 1.5, 0.05, "rem"],
+
+            ["Title text colour", "--title", "color"],
+            ["Subtitle text colour", "--sub", "color"],
+            ["Body text colour", "--body", "color"],
+
+            ["Background colour", "--bg", "color"],
+            ["Header colour", "--hdr", "color"],
+            ["Bubble colour", "--bub", "color"],
+            ["Menu colour", "--menu", "color"],
+            ["Button colour 1", "--b1", "color"],
+            ["Button colour 2", "--b2", "color"]
+        ];
+
+        /*
+            root refers to the <html> element.
+
+            CSS variables defined on :root can be changed from
+            JavaScript with:
+
+                root.style.setProperty("--bg", "#ffffff");
+        */
+        var root = document.documentElement;
+
+        /*
+            saved contains custom settings stored in localStorage.
+            Unlike sessionStorage, localStorage normally survives
+            closing and reopening the browser.
+        */
+        var saved = {};
+
+        try {
+            saved = JSON.parse(
+                localStorage.getItem("prefs") || "{}"
+            );
+        } catch (error) {
+            saved = {};
+        }
+
+        /*
+            hex() converts a CSS colour value into a normalized
+            hexadecimal representation suitable for <input type=color>.
+        */
+        function hex(value) {
+            var canvas = document
+                .createElement("canvas")
+                .getContext("2d");
+
+            canvas.fillStyle = value.trim();
+
+            return canvas.fillStyle;
+        }
+
+        /*
+            draw() creates all of the Settings page controls.
+        */
+        function draw() {
+            $("#set").innerHTML = "";
+
+            SET.forEach(function (setting) {
+                var label = document.createElement("label");
+
+                var input = document.createElement(
+                    setting[2] === "select"
+                        ? "select"
+                        : "input"
+                );
+
+                label.textContent = setting[0];
+
+                if (setting[2] === "select") {
+                    /*
+                        Read the current CSS variable so the
+                        correct font is selected when the settings
+                        page is redrawn.
+                    */
+                    var current =
+                        getComputedStyle(root)
+                            .getPropertyValue(setting[1])
+                            .replace(/\s/g, "");
+
+                    FONTS.forEach(function (font) {
+                        var option =
+                            document.createElement("option");
+
+                        option.value = font[1];
+                        option.textContent = font[0];
+
+                        if (
+                            font[1].replace(/\s/g, "") === current
+                        ) {
+                            option.selected = true;
+                        }
+
+                        input.appendChild(option);
+                    });
+                } else if (setting[2] === "range") {
+                    /*
+                        Range input values are numbers, while
+                        CSS variables need their unit appended.
+                    */
+                    input.min = setting[3];
+                    input.max = setting[4];
+                    input.step = setting[5];
+
+                    input.value = parseFloat(
+                        getComputedStyle(root)
+                            .getPropertyValue(setting[1])
+                    );
+                } else {
+                    /*
+                        Colour settings use a native colour picker.
+                    */
+                    input.value = hex(
+                        getComputedStyle(root)
+                            .getPropertyValue(setting[1])
+                    );
+                }
+
+                /*
+                    Every time the user changes a setting:
+                    1. Update the CSS variable immediately.
+                    2. Save the value to localStorage.
+                */
+                input.oninput = function () {
+                    var value =
+                        setting[2] === "range"
+                            ? input.value + setting[6]
+                            : input.value;
+
+                    root.style.setProperty(
+                        setting[1],
+                        value
+                    );
+
+                    saved[setting[1]] = value;
+
+                    try {
+                        localStorage.setItem(
+                            "prefs",
+                            JSON.stringify(saved)
+                        );
+                    } catch (error) {
+                        /* Saving is optional; the live preview still works. */
+                    }
+                };
+
+                label.appendChild(input);
+                $("#set").appendChild(label);
+            });
+        }
+
+        /*
+            Restore saved settings before drawing the controls.
+        */
+        for (var key in saved) {
+            root.style.setProperty(key, saved[key]);
+        }
+
+        draw();
+
+        /*
+            Reset removes all custom CSS variables and deletes
+            the saved preferences.
+        */
+        $("#reset").onclick = function () {
+            SET.forEach(function (setting) {
+                root.style.removeProperty(setting[1]);
+            });
+
+            saved = {};
+
+            try {
+                localStorage.removeItem("prefs");
+            } catch (error) {
+                /* Ignore storage errors. */
+            }
+
+            draw();
+        };
+
+
+        /* =====================================================
+           13. STARTUP: CHOOSE THE INITIAL PAGE
+           =====================================================
+
+           If the URL contains a valid hash, such as:
+
+               index.html#devlog
+
+           the website opens that page.
+
+           Otherwise, it starts on TLDR.
+        ===================================================== */
+
+        var hash = location.hash.slice(1);
+
+        go(
+            PAGES.some(function (page) {
+                return page[0] === hash;
+            })
+                ? hash
+                : "tldr",
+            1
+        );
+
+    </script>
+</body>
+
+</html>
